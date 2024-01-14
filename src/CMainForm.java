@@ -217,16 +217,13 @@ public class CMainForm extends JFrame {
      * Metoda tworząca wykres na podstawie danych z symulacji.
      */
     private JFreeChart createChart(List<Double> timePoints, List<Double> xPoints, List<Double> yPoints) {
-        XYSeries seriesX = new XYSeries("X(t)");
         XYSeries seriesY = new XYSeries("Y(t)");
 
         for (int i = 0; i < timePoints.size(); i++) {
-            seriesX.add(timePoints.get(i), xPoints.get(i));
             seriesY.add(timePoints.get(i), yPoints.get(i));
         }
 
         XYSeriesCollection dataset = new XYSeriesCollection();
-        dataset.addSeries(seriesX);
         dataset.addSeries(seriesY);
 
         return ChartFactory.createXYLineChart(
