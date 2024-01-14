@@ -15,6 +15,8 @@ import java.util.List;
 
 /**
  * Klasa reprezentująca główne okno aplikacji GUI do symulacji rzutu ukośnego.
+ * @author Kacper Hanus
+ * @author Michał Florian
  */
 public class CMainForm extends JFrame {
     private JTextField initialVelocityField;
