@@ -241,18 +241,18 @@ public class CMainForm extends JFrame {
         DecimalFormat format = new DecimalFormat("#.##");
 
         resultTextArea.setText("Wyniki symulacji:\n");
-        resultTextArea.append("Czas [s]\tX(t) [m]\tY(t) [m]\n");
+        resultTextArea.append("Czas [s]\tY(t) [m]\n");
 
         List<Double> timePoints = motionData.getTimePoints();
-        List<Double> xPoints = motionData.getXPoints();
+
         List<Double> yPoints = motionData.getYPoints();
 
         for (int i = 0; i < timePoints.size(); i++) {
             double time = timePoints.get(i);
-            double x = xPoints.get(i);
+
             double y = yPoints.get(i);
 
-            resultTextArea.append(format.format(time) + "\t" + format.format(x) + "\t" + format.format(y) + "\n");
+            resultTextArea.append(format.format(time)   + "\t" + format.format(y) + "\n");
         }
     }
 

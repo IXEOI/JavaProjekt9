@@ -17,7 +17,7 @@ public class MotionData {
      */
     public MotionData(List<Double> timePoints, List<Double> xPoints, List<Double> yPoints) {
         this.timePoints = timePoints;
-        this.xPoints = xPoints;
+
         this.yPoints = yPoints;
     }
 

@@ -17,7 +17,7 @@ public class DataWriter {
     public static void saveDataToFile(String filePath, List<String> data) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             // Zapisywanie nagłówków
-            writer.write("Czas [s]X(t) [m] Y(t) [m]");
+            writer.write("Czas [s] Y(t) [m]");
             writer.newLine();
 
             // Zapisywanie danych
