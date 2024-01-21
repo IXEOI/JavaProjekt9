@@ -21,18 +21,18 @@ public class ChartGenerator {
      */
     public static void generateCharts(List<Double> timePoints, List<Double> xPoints, List<Double> yPoints) {
         // Tworzenie serii danych dla współrzędnych X i Y
-
+        XYSeries seriesX = new XYSeries("X(t)");
         XYSeries seriesY = new XYSeries("Y(t)");
 
         // Dodawanie punktów danych do serii
         for (int i = 0; i < timePoints.size(); i++) {
-
+            seriesX.add(timePoints.get(i), xPoints.get(i));
             seriesY.add(timePoints.get(i), yPoints.get(i));
         }
 
         // Tworzenie kolekcji serii danych
         XYSeriesCollection dataset = new XYSeriesCollection();
-
+        dataset.addSeries(seriesX);
         dataset.addSeries(seriesY);
 
         // Tworzenie wykresu XY Line

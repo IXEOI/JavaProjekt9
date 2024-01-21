@@ -10,6 +10,7 @@ class MotionSimulator {
     private double launchAngle; // kąt rzutu [stopnie]
     private double mass; // masa ciała [kg]
     private double airResistanceCoefficient; // współczynnik oporu powietrza
+    private double maxAirResistanceCoefficient; // Maksymalna wartość współczynnika oporu powietrza
 
     /**
      * Konstruktor klasy MotionSimulator.
@@ -27,6 +28,7 @@ class MotionSimulator {
         this.launchAngle = Math.toRadians(launchAngle);
         this.mass = mass;
         this.airResistanceCoefficient = airResistanceCoefficient;
+        this.maxAirResistanceCoefficient = 1.0; // Ustaw maksymalną wartość współczynnika oporu powietrza
     }
 
     /**
@@ -41,7 +43,7 @@ class MotionSimulator {
         List<Double> xPoints = new ArrayList<>();
         List<Double> yPoints = new ArrayList<>();
 
-        double beta = airResistanceCoefficient / mass;
+        double beta = airResistanceCoefficient / maxAirResistanceCoefficient; // Przeskalowanie do zakresu 0-1
 
         double vx = initialVelocity * Math.cos(launchAngle);
         double vy = initialVelocity * Math.sin(launchAngle);
@@ -74,8 +76,8 @@ class MotionSimulator {
     private double[] calculateDerivatives(double t, double x, double y, double vx, double vy, double beta) {
         double dxdt = vx;
         double dydt = vy;
-        double dvxdt = -beta * vx;
-        double dvydt = -g - beta * vy;
+        double dvxdt = -beta * vx; // Wpływ masy ciała
+        double dvydt = -g - beta * vy; // Wpływ masy ciała
 
         return new double[]{dxdt, dydt, dvxdt, dvydt};
     }

@@ -137,6 +137,18 @@ public class CMainForm extends JFrame {
             double mass = Double.parseDouble(massField.getText().replace(",", "."));
             double airResistanceCoefficient = Double.parseDouble(airResistanceField.getText().replace(",", "."));
 
+            // Sprawdź, czy żadna z wprowadzonych wartości nie jest ujemna
+            if (initialVelocity < 0 || launchAngle < 0 || mass < 0 || airResistanceCoefficient < 0) {
+                JOptionPane.showMessageDialog(this, "Błąd: Wprowadź wartości nieujemne.", "Błąd", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Sprawdź, czy kąt rzutu nie przekracza 90 stopni
+            if (launchAngle > 90) {
+                JOptionPane.showMessageDialog(this, "Błąd: Kąt rzutu nie może być większy niż 90 stopni.", "Błąd", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             MotionSimulator simulator = new MotionSimulator(10.0, initialVelocity, launchAngle, mass, airResistanceCoefficient);
             double timeStep = 0.02;
             double totalTime = 2 * initialVelocity * Math.sin(Math.toRadians(launchAngle)) / 10.0;
@@ -156,6 +168,7 @@ public class CMainForm extends JFrame {
             JOptionPane.showMessageDialog(this, "Błąd: Wprowadź poprawne wartości liczbowe.", "Błąd", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 
     /**
      * Metoda obsługująca kliknięcie przycisku "Zapisz Obliczenia".
@@ -241,18 +254,18 @@ public class CMainForm extends JFrame {
         DecimalFormat format = new DecimalFormat("#.##");
 
         resultTextArea.setText("Wyniki symulacji:\n");
-        resultTextArea.append("Czas [s]\tY(t) [m]\n");
+        resultTextArea.append("Czas [s]\tX(t) [m]\tY(t) [m]\n");
 
         List<Double> timePoints = motionData.getTimePoints();
-
+        List<Double> xPoints = motionData.getXPoints();
         List<Double> yPoints = motionData.getYPoints();
 
         for (int i = 0; i < timePoints.size(); i++) {
             double time = timePoints.get(i);
-
+            double x = xPoints.get(i);
             double y = yPoints.get(i);
 
-            resultTextArea.append(format.format(time)   + "\t" + format.format(y) + "\n");
+            resultTextArea.append(format.format(time) + "\t" + format.format(x) + "\t" + format.format(y) + "\n");
         }
     }
 
